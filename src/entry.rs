@@ -7,10 +7,10 @@ extern {
 
 global_asm!("
 _start:
-    lea rsp, [stack_bottom]
-    mov rdi, 11 // sys_sbrk
-    mov rsi, 0x10000 // len
-    mov r8, QWORD 0
+    leal rsp, [stack_bottom]
+    movl rdi, 11 // sys_sbrk
+    movl rsi, 0x10000 // len
+    movl r8, 0
     syscall
     mov rsp, QWORD rax
     jmp _liboh_entry
