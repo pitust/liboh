@@ -8,12 +8,12 @@ extern {
 global_asm!("
 .intel_syntax noprefix
 _start:
-    leal rsp, [stack_bottom]
-    movl rdi, 11 // sys_sbrk
-    movl rsi, 0x10000 // len
-    movl r8, 0
+    lea rsp, [stack_bottom]
+    mov rdi, 11 // sys_sbrk
+    mov rsi, 0x10000 // len
+    mov r8, 0
     syscall
-    mov rsp, QWORD rax
+    mov rsp, rax
     jmp _liboh_entry
 .align 8
 stack_top:
