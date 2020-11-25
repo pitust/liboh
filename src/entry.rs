@@ -7,12 +7,12 @@ extern {
 
 global_asm!("
 _start:
-    mov rsp, stack_bottom
-    mov rdi, 11 ; sys_sbrk
-    mov rsi, 0x10000 ; len
-    mov r8, 0
+    lea rsp, [stack_bottom]
+    mov rdi, 11 // sys_sbrk
+    mov rsi, 0x10000 // len
+    mov r8, QWORD 0
     syscall
-    mov rsp, rax
+    mov rsp, QWORD rax
     jmp _liboh_entry
 .align 8
 stack_top:
