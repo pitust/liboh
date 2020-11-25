@@ -14,8 +14,7 @@ _start:
     syscall
     mov rsp, rax
     jmp _liboh_entry
-    jmp $
-align 8
+.align 8
 stack_top:
     .space 0x400, 0x00
 stack_bottom:
