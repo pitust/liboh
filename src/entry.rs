@@ -14,11 +14,10 @@ _start:
     syscall
     mov rsp, rax
     jmp _liboh_entry
-    do_syscall sys_klog, rax, 0
     jmp $
 align 8
 stack_top:
-    resb 4096
+    .space 0x400, 0x00
 stack_bottom:
 ");
 
