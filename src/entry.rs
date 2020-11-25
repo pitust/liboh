@@ -6,6 +6,7 @@ extern {
 }
 
 global_asm!("
+.intel_syntax noprefix
 _start:
     leal rsp, [stack_bottom]
     movl rdi, 11 // sys_sbrk
@@ -18,6 +19,7 @@ _start:
 stack_top:
     .space 0x400, 0x00
 stack_bottom:
+.att_syntax
 ");
 
 #[macro_export]
