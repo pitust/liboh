@@ -7,20 +7,36 @@ extern {
 
 global_asm!("
 .intel_syntax noprefix
-_start:
-    lea rsp, [stack_bottom]
-    mov rdi, 11 // sys_sbrk
-    mov rsi, 0x10000 // len
-    mov r8, 0
-    syscall
-    mov rsp, rax
-    jmp _liboh_entry
 .align 8
 stack_top:
     .space 0x400, 0x00
 stack_bottom:
 .att_syntax
 ");
+
+#[naked]
+#[no_mangle]
+pub unsafe extern "C" fn _start() -> ! {
+    asm!(".intel_syntax noprefix
+          lea rsp, [rip + stack_bottom]
+          push rax
+          mov rdi, 11
+          mov rsi, 0x10000
+          mov r8, 0
+          push rcx
+          push r11
+          syscall
+          pop r11
+          pop rcx
+          pop rbx
+          mov rsp, rax
+          push rbx
+          pop rax
+          .att_syntax");
+
+
+    _liboh_entry();
+}
 
 #[macro_export]
 macro_rules! main {
@@ -38,6 +54,6 @@ extern "C" fn _liboh_entry() -> ! {
 
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    write!(crate::klog::KLog, "{}", info);
+    write!(crate::klog::KLog, "{}", info).unwrap();
     loop {}
 }

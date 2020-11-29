@@ -1,6 +1,8 @@
 #![no_std]
 #![feature(global_asm)]
 #![feature(alloc_prelude)]
+#![feature(asm)]
+#![feature(naked_functions)]
 extern crate alloc;
 
 // todo: init allocation and stuff
@@ -11,6 +13,7 @@ pub mod syscall;
 pub mod prelude;
 // todo
 mod alloction;
+pub mod mutex;
 pub mod klog {
     pub struct KLog;
     impl core::fmt::Write for KLog {

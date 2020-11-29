@@ -1,5 +1,6 @@
 global_asm!(
     "
+.intel_syntax noprefix
 __sys:
     push rcx
     push r11
@@ -7,6 +8,7 @@ __sys:
     pop r11
     pop rcx
     ret
+.att_syntax
 "
 );
 extern "C" {
