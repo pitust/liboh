@@ -24,3 +24,10 @@ pub fn write_buf<T: serde::Serialize>(t: T) {
 pub fn write_raw(d: &[u8]) {
     crate::syscall::sys_bindbuffer(d);
 }
+
+pub fn accept<'a, T: FnOnce<(U,), Output = V>, U: serde::Deserialize<'a> + Clone, V: serde::Serialize> (name: &str, p: T) {
+    crate::syscall::sys_accept("initd");
+    let x: U = read_buf();
+    write_buf(p(x));
+    crate::syscall::sys_respond();
+}

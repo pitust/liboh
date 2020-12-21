@@ -3,6 +3,8 @@
 #![feature(alloc_prelude)]
 #![feature(asm)]
 #![feature(naked_functions)]
+#![feature(unboxed_closures)]
+
 extern crate alloc;
 
 // todo: init allocation and stuff
