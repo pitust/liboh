@@ -1,11 +1,11 @@
 [package]
-name = "liboh"
-version = "0.1.0"
 authors = ["pitust <piotr@stelmaszek.com>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+name = "liboh"
+version = "0.1.0"
 
 [dependencies]
 linked_list_allocator = "0.8.6"
+postcard = "0.5.1"
+serde = "1.0.118"
 
