@@ -4,4 +4,4 @@ pub use alloc::{
     prelude::v1::*
 };
 pub use core::sync::atomic::*;
-pub use crate::{main, prelude};
+pub use crate::{main, println};
